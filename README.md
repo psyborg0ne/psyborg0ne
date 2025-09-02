@@ -20,11 +20,11 @@ I've published a few mods over on mod.io, stats can be found below
 
 <!-- MODIO:START -->
 
-| 👍 Positive | 👎 Negative | % Positive | 💾 Downloads | 👥 Subscribers |
+| 💾 Overall Downloads | 👥 Subscribers | 👍 Positive | 👎 Negative | % Positive |
 |------------|-------------|------------|--------------|----------------|
-| 22 | 0 | 100 | 1729 | 558 |
+| 1729 | 558 | 22 | 0 | 100 |
 
-_Last updated: 2025-09-02 17:47 UTC_
+_Last updated: 2025-09-02 17:54 UTC_
 <!-- MODIO:END -->
  
 
