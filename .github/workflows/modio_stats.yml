@@ -73,9 +73,9 @@ jobs:
             /<!-- MODIO:START -->/ {
               print
               print ""
-              print "| 👍 Positive | 👎 Negative | % Positive | 💾 Downloads | 👥 Subscribers |"
+              print "| 💾 Overall Downloads | 👥 Subscribers | 👍 Positive | 👎 Negative | % Positive |"
               print "|------------|-------------|------------|--------------|----------------|"
-              print "| " ru " | " rn " | " rpp " | " d " | " s " |"
+              print "| " d " | " s " | " ru " | " rn " | " rpp " |" 
               print ""
               print "_Last updated: " u "_"
               found=1
