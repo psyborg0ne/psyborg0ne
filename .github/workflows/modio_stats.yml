@@ -1,0 +1,93 @@
+name: Update README with aggregated mod.io stats
+
+on:
+  schedule:
+    - cron: "0 0 * * MON" # every hour
+  workflow_dispatch: # allow manual runs
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch and aggregate mod.io stats
+        id: aggregate
+        run: |
+          MOD_IDS=(4088837 4020443 4868206)
+          total_downloads=0
+          total_subscribers=0
+          total_rpos=0
+          total_rneg=0
+
+          for id in "${MOD_IDS[@]}"; do
+            echo "Fetching mod $id..."
+            curl -s "https://api.mod.io/v1/games/2869/mods/$id?api_key=${{ secrets.MODIO_API_KEY }}" -o mod.json
+
+            d=$(jq '.stats.downloads_total' mod.json)
+            s=$(jq '.stats.subscribers_total' mod.json)
+            rp=$(jq '.stats.ratings_positive' mod.json)
+            rn=$(jq '.stats.ratings_negative' mod.json)
+
+            total_downloads=$((total_downloads + d))
+            total_subscribers=$((total_subscribers + s))
+            total_rpos=$((total_rpos + rp))
+            total_rneg=$((total_rneg + rn))
+          done
+
+          # Calculate percentage positive
+          total_ratings=$((total_rpos + total_rneg))
+          if [ "$total_ratings" -gt 0 ]; then
+            rpp=$((100 * total_rpos / total_ratings))
+          else
+            rpp=0
+          fi
+
+          updated=$(date -u +"%Y-%m-%d %H:%M UTC")
+
+          echo "downloads=$total_downloads" >> $GITHUB_OUTPUT
+          echo "subscribers=$total_subscribers" >> $GITHUB_OUTPUT
+          echo "rate_pos=$total_rpos" >> $GITHUB_OUTPUT
+          echo "rate_neg=$total_rneg" >> $GITHUB_OUTPUT
+          echo "rate_pos_percent=$rpp" >> $GITHUB_OUTPUT
+          echo "updated=$updated" >> $GITHUB_OUTPUT
+
+      - name: Update README
+        run: |
+          downloads="${{ steps.aggregate.outputs.downloads }}"
+          subscribers="${{ steps.aggregate.outputs.subscribers }}"
+          updated="${{ steps.aggregate.outputs.updated }}"
+          rate_pos="${{ steps.aggregate.outputs.rate_pos }}"
+          rate_neg="${{ steps.aggregate.outputs.rate_neg }}"
+          rate_pos_percent="${{ steps.aggregate.outputs.rate_pos_percent }}"
+
+          # Replace content between the markers
+          awk -v d="$downloads" \
+              -v s="$subscribers" \
+              -v u="$updated" \
+              -v ru="$rate_pos" \
+              -v rn="$rate_neg" \
+              -v rpp="$rate_pos_percent" '
+            /<!-- MODIO:START -->/ {
+              print
+              print ""
+              print "| 👍 Positive | 👎 Negative | % Positive | 💾 Downloads | 👥 Subscribers |"
+              print "|------------|-------------|------------|--------------|----------------|"
+              print "| " ru " | " rn " | " rpp " | " d " | " s " |"
+              print ""
+              print "_Last updated: " u "_"
+              found=1
+              next
+            }
+            /<!-- MODIO:END -->/ {found=0}
+            !found {print}
+          ' README.md > README.new
+
+          mv README.new README.md
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update README with aggregated mod.io stats"
