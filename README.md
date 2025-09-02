@@ -19,7 +19,12 @@ To name a few:
 I've published a few mods over on mod.io, stats can be found below
 
 <!-- MODIO:START -->
-_Last updated: never_
+
+| 👍 Positive | 👎 Negative | % Positive | 💾 Downloads | 👥 Subscribers |
+|------------|-------------|------------|--------------|----------------|
+| 22 | 0 | 100 | 1729 | 558 |
+
+_Last updated: 2025-09-02 17:47 UTC_
 <!-- MODIO:END -->
  
 
