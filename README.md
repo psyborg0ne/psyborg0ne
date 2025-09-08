@@ -22,9 +22,9 @@ I've published a few mods over on mod.io, stats can be found below
 
 | 💾 Overall Downloads | 👥 Subscribers | 👍 Positive | 👎 Negative | % Positive |
 |------------|-------------|------------|--------------|----------------|
-| 1729 | 558 | 22 | 0 | 100 |
+| 1758 | 567 | 22 | 0 | 100 |
 
-_Last updated: 2025-09-02 17:54 UTC_
+_Last updated: 2025-09-08 00:57 UTC_
 <!-- MODIO:END -->
  
 
