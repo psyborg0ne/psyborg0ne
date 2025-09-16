@@ -16,7 +16,7 @@ To name a few:
 - Many many more
 
 #### Mods
-I've published a few mods over on mod.io, stats can be found below
+I've published a few mods over on [mod.io](https://mod.io/u/psyborg0ne/), stats can be found below
 
 <!-- MODIO:START -->
 
