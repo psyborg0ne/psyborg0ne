@@ -22,9 +22,9 @@ I've published a few mods over on [mod.io](https://mod.io/u/psyborg0ne/), stats 
 
 | 💾 Overall Downloads | 👥 Subscribers | 👍 Positive | 👎 Negative | % Positive |
 |------------|-------------|------------|--------------|----------------|
-| 4186 | 1184 | 40 | 0 | 100 |
+| 4219 | 1190 | 40 | 0 | 100 |
 
-_Last updated: 2026-08-24 00:43 UTC_
+_Last updated: 2026-08-31 02:30 UTC_
 <!-- MODIO:END -->
  
 
